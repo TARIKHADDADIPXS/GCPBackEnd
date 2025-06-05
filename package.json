@@ -11,7 +11,8 @@
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,json,md}'",
     "check:types": "tsc --noEmit",
-    "start": "npx ts-node src/index.ts"
+    "start": "npx ts-node src/index.ts",
+    "start:prod": "node dist/index.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.16.0",
