@@ -16,4 +16,9 @@ steps:
       ]
     dir: "codit-luxembourg"
     timeout: "20000s"
+
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+
 images: []
