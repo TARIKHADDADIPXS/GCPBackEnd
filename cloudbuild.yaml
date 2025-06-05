@@ -1,12 +1,10 @@
 steps:
   - name: "gcr.io/cloud-builders/npm"
-    dir: "backend"
     args: ["install"]
     env:
       - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
 
   - name: "gcr.io/cloud-builders/npm"
-    dir: "backend"
     args: ["run", "build"]
     env:
       - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
