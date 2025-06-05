@@ -8,7 +8,6 @@ steps:
     args: ["run", "build"]
 
   - name: "gcr.io/cloud-builders/gcloud"
-    dir: "backend"
     args: [
       "app",
       "deploy",
