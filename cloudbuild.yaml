@@ -12,7 +12,7 @@ steps:
     args: [
       "app",
       "deploy",
-      "app.yaml",
+      "backend/app.yaml",
       "--project=codit-luxembourg",
       "--quiet"
     ]
