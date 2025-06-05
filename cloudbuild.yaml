@@ -14,7 +14,6 @@ steps:
         "--project=codit-luxembourg",
         "--quiet"
       ]
-    dir: "codit-luxembourg"
     timeout: "20000s"
 
 options:
