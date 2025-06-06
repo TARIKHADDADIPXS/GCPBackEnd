@@ -15,7 +15,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
-app.options("*", cors());
 
 // Setup Google Cloud Storage
 const bucketName = process.env.GCP_BUCKET_NAME;
@@ -28,7 +27,7 @@ const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
 // Route: Get Signed URL
-app.post("/api/get-signed-url", async (req: Request, res: Response): Promise<any>  => {
+app.post("get-signed-url", async (req: Request, res: Response): Promise<any>  => {
   const { filename } = req.body;
 
   if (!filename || typeof filename !== "string") {
