@@ -12,27 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// index.ts
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const storage_1 = require("@google-cloud/storage");
-const path_1 = __importDefault(require("path"));
+// Load env vars
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+// Middleware
+app.use((0, cors_1.default)({
+    origin: "*", // Change to your frontend URL in production
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express_1.default.json());
-// Validate env vars
-const keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+app.options("*", (0, cors_1.default)());
+// Setup Google Cloud Storage
 const bucketName = process.env.GCP_BUCKET_NAME;
-if (!keyFilename || !bucketName) {
-    throw new Error("Missing GOOGLE_APPLICATION_CREDENTIALS or GCP_BUCKET_NAME in .env");
+if (!bucketName) {
+    throw new Error("Missing required environment variables.");
 }
-const storage = new storage_1.Storage({
-    keyFilename: path_1.default.resolve(keyFilename),
-});
+const storage = new storage_1.Storage();
 const bucket = storage.bucket(bucketName);
-// Route to get signed URL
+// Route: Get Signed URL
 app.post("/api/get-signed-url", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { filename } = req.body;
     if (!filename || typeof filename !== "string") {
@@ -54,7 +56,8 @@ app.post("/api/get-signed-url", (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.status(500).json({ error: "Failed to generate signed URL" });
     }
 }));
+// Start server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Backend is running on http://localhost:${PORT}`);
+    console.log(`Backend listening on port ${PORT}`);
 });
