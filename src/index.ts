@@ -39,8 +39,11 @@ app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  =
   const pad = (n: number) => n.toString().padStart(2, "0");
   const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
-  // You can prepend or replace the filename as needed. Here, we prepend:
-  filename = `${timestamp}_${filename}`;
+  // Generate 3 random digits
+  const randomDigits = Math.floor(100 + Math.random() * 900); // ensures 3 digits
+
+  // Prepend timestamp and random digits to filename
+  filename = `${timestamp}_${randomDigits}_${filename}`;
 
   const file = bucket.file(filename);
   const expires = Date.now() + 10 * 60 * 1000; // 10 minutes
