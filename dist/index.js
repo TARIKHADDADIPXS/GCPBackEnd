@@ -26,7 +26,6 @@ app.use((0, cors_1.default)({
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express_1.default.json());
-app.options("*", (0, cors_1.default)());
 // Setup Google Cloud Storage
 const bucketName = process.env.GCP_BUCKET_NAME;
 if (!bucketName) {
@@ -35,7 +34,7 @@ if (!bucketName) {
 const storage = new storage_1.Storage();
 const bucket = storage.bucket(bucketName);
 // Route: Get Signed URL
-app.post("/api/get-signed-url", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/get-signed-url", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { filename } = req.body;
     if (!filename || typeof filename !== "string") {
         return res.status(400).json({ error: "Filename is required and must be a string" });

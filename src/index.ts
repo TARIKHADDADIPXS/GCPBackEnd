@@ -27,7 +27,7 @@ const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
 // Route: Get Signed URL
-app.post("get-signed-url", async (req: Request, res: Response): Promise<any>  => {
+app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  => {
   const { filename } = req.body;
 
   if (!filename || typeof filename !== "string") {
