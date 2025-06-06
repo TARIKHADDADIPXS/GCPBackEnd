@@ -4,10 +4,8 @@ service: backend
 
 entrypoint: npm run start:prod
 
-
 env_variables:
-  GCP_BUCKET_NAME: "codit-test-bucket"
-
+  GCP_BUCKET_NAME: "codit-test-bucket"  # <-- Set your actual bucket name here
 
 handlers:
   - url: /.*

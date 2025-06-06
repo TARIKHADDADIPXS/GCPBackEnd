@@ -1,13 +1,13 @@
 steps:
   - name: "gcr.io/cloud-builders/npm"
     args: ["install"]
-    env:
-      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
 
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
-    env:
-      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args: ["-c", "ls -l dist"]
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -19,8 +19,6 @@ steps:
         "--quiet"
       ]
     timeout: "20000s"
-    env:
-      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
