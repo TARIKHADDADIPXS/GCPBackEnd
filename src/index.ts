@@ -40,7 +40,7 @@ app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  =
   const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
   // You can prepend or replace the filename as needed. Here, we prepend:
-  filename = ` ${filename}_${timestamp}`;
+  filename = `${timestamp}_${filename}`;
 
   const file = bucket.file(filename);
   const expires = Date.now() + 10 * 60 * 1000; // 10 minutes
