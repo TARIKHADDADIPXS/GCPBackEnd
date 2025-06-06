@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Storage } from "@google-cloud/storage";
-import path from "path";
 
 // Load env vars
 dotenv.config();
@@ -14,16 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 // Setup Google Cloud Storage
-const keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 const bucketName = process.env.GCP_BUCKET_NAME;
 
-if (!keyFilename || !bucketName) {
+if (!bucketName) {
   throw new Error("Missing required environment variables.");
 }
 
-const storage = new Storage({
-  keyFilename: path.resolve(keyFilename), // resolves relative paths
-});
+const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
 // Route: Get Signed URL
