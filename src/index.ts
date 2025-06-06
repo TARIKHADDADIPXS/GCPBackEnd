@@ -28,11 +28,19 @@ const bucket = storage.bucket(bucketName);
 
 // Route: Get Signed URL
 app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  => {
-  const { filename } = req.body;
+  let { filename } = req.body;
 
   if (!filename || typeof filename !== "string") {
     return res.status(400).json({ error: "Filename is required and must be a string" });
   }
+
+  // Generate timestamp in 'YYYY-MM-DD HH:mm:ss' format
+  const now = new Date();
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+  // You can prepend or replace the filename as needed. Here, we prepend:
+  filename = ` ${filename}_${timestamp}`;
 
   const file = bucket.file(filename);
   const expires = Date.now() + 10 * 60 * 1000; // 10 minutes
@@ -50,7 +58,6 @@ app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  =
     return res.status(500).json({ error: "Failed to generate signed URL" });
   }
 });
-
 // Start server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
