@@ -27,7 +27,7 @@ const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
 // Route: Get Signed URL
-app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  => {
+app.post("/get-signed-url", async (req: Request, res: Response): Promise<any> => {
   let { filename } = req.body;
 
   if (!filename || typeof filename !== "string") {
@@ -43,7 +43,8 @@ app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  =
   const randomDigits = Math.floor(100 + Math.random() * 900); // ensures 3 digits
 
   // Prepend timestamp and random digits to filename
-  filename = `inputs/${timestamp}_${randomDigits}_${filename}`;
+  const originalFilename = filename.split('/').pop();
+  filename = `inputs/${timestamp}_${randomDigits}_${originalFilename}`;
 
   const file = bucket.file(filename);
   const expires = Date.now() + 10 * 60 * 1000; // 10 minutes
