@@ -151,6 +151,48 @@ This project is configured for deployment to Google App Engine Standard Environm
 - Run `npm run lint` to check for lint errors.
 - Run `npm run format` to auto-format the codebase.
 
+
+### CI/CD Pipeline
+
+This project uses **Google Cloud Build** for continuous integration and deployment. The pipeline is triggered automatically whenever you push changes to the repository (if you have set up a Cloud Build trigger in your GCP project).
+
+#### How it works
+
+1. **Cloud Build Trigger**:  
+   - A trigger is configured in Google Cloud Console to watch your repository (e.g., GitHub or Cloud Source Repositories).
+   - On every push to the main branch (or any branch you specify), Cloud Build starts a new build.
+
+2. **cloudbuild.yaml**:  
+   - The build steps are defined in the `cloudbuild.yaml` file at the root of this project.
+   - Typical steps include:
+     - Installing dependencies (`npm install`)
+     - Building the TypeScript project (`npm run build`)
+     - Deploying the built app to Google App Engine (`gcloud app deploy`)
+
+3. **App Engine Deployment**:  
+   - After a successful build, Cloud Build deploys the latest code to App Engine using the configuration in `app.yaml`.
+   - App Engine automatically handles scaling, logging, and serving your backend.
+
+
+#### Setting up Cloud Build Trigger
+
+1. Go to [Cloud Build Triggers](https://console.cloud.google.com/cloud-build/triggers) in your GCP project.
+2. Click **Create Trigger**.
+3. Connect your repository and select the branch to watch.
+4. Set the build configuration to use `cloudbuild.yaml`.
+5. Save the trigger.
+
+Now, every push to your repository will automatically build and deploy your backend to App Engine.
+
+
+#### Manual Deployment
+
+You can also deploy manually at any time using:
+
+```sh
+gcloud app deploy
+```
+
 ## Contributing
 
 1. Fork the repo and create your branch.
