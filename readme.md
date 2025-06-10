@@ -119,11 +119,12 @@ This project is configured for deployment to Google App Engine Standard Environm
 
 2. **Deploy**
 
-    Options 1 :
+    **Options 1** :
     - By only pushing to the repository, this triggers a build from the Google Cloud Build Triggers.
 
-    Option 2 :
+    **Option 2** :
     - Manually deploy
+
    ```sh
    gcloud app deploy
    ```
@@ -139,6 +140,11 @@ This project is configured for deployment to Google App Engine Standard Environm
 
 - CORS is enabled for all origins in development.
 - For production, update the `origin` in the CORS middleware in [`src/index.ts`](src/index.ts) and in [`cors.json`](cors.json) for your GCP bucket.
+
+-To update cors for the bucket and enable multiple entries please use the folowing command assuming that you have the Google SDK installed.
+```
+ gsutil cors set cors.json gs://codit-test-bucket
+```
 
 ### Formatting & Linting
 
