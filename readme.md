@@ -72,13 +72,14 @@ This project is a Node.js backend built with Express and TypeScript, designed to
 
    ```sh
    npm run build
+   npm run dev
    npm start
    ```
 
    Or for development with hot-reload:
 
    ```sh
-   npm run start
+   npm run dev
    ```
 
    The server will start on port `4000` by default.
