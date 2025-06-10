@@ -43,7 +43,7 @@ app.post("/get-signed-url", async (req: Request, res: Response): Promise<any>  =
   const randomDigits = Math.floor(100 + Math.random() * 900); // ensures 3 digits
 
   // Prepend timestamp and random digits to filename
-  filename = `${timestamp}_${randomDigits}_${filename}`;
+  filename = `inputs/${timestamp}_${randomDigits}_${filename}`;
 
   const file = bucket.file(filename);
   const expires = Date.now() + 10 * 60 * 1000; // 10 minutes
