@@ -194,6 +194,29 @@ You can also deploy manually at any time using:
 gcloud app deploy
 ```
 
+### API Documentation (Swagger/OpenAPI)
+
+This project includes interactive API documentation powered by [Swagger UI](https://swagger.io/tools/swagger-ui/).
+
+- **View the docs locally:**  
+  Start your server and open [http://localhost:4000/api-docs](http://localhost:4000/api-docs) in your browser.
+
+- **Features:**  
+  - Explore and test API endpoints directly from the browser.
+  - View request/response schemas and example payloads.
+
+#### How it works
+
+- The Swagger UI is served at the `/api-docs` route.
+- The OpenAPI specification is generated automatically from code comments and route definitions.
+
+#### Customizing
+
+- To update or add endpoint documentation, edit the JSDoc comments in your route files (e.g., `src/routes/storage.ts`).
+- The Swagger setup is located in `src/swagger.ts`.
+
+---
+
 ## Contributing
 
 1. Fork the repo and create your branch.
