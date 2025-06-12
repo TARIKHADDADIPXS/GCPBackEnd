@@ -15,7 +15,7 @@ steps:
         "app",
         "deploy",
         "app.yaml",
-        "--project=codit-luxembourg",
+        "--project=competition-scanner",
         "--quiet"
       ]
     timeout: "20000s"
