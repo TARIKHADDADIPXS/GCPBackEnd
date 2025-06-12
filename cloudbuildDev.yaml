@@ -1,0 +1,28 @@
+steps:
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install"]
+    env:
+      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
+
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build"]
+    env:
+      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "app",
+        "deploy",
+        "appDev.yaml",
+        "--project=codit-luxembourg",
+        "--quiet"
+      ]
+    timeout: "20000s"
+    env:
+      - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
+
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+images: []
