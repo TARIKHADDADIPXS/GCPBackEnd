@@ -1,6 +1,6 @@
 runtime: nodejs20
 env: standard
-service: default
+service: backend
 
 entrypoint: npm run start:prod
 
