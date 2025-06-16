@@ -14,12 +14,14 @@ app.use(cors({
     "http://localhost:3000",
     "https://frontend-dot-codit-luxembourg.ew.r.appspot.com",
     "https://frontend-dot-competition-scanner.ew.r.appspot.com",
+    "https://frontend-dot-competition-scanner.ew.r.appspot.com/",
     "https://frontend.poccactus.lu",
     "https://poccactus.lu"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "x-goog-resumable"]
 }));
+app.options('*', cors());
 
 app.use(express.json());
 app.use(storageRoutes);
