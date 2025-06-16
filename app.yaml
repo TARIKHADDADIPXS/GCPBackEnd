@@ -13,4 +13,4 @@ handlers:
   - url: /.*
     login: admin
     script: auto
-    secure: always
+    secure: always
