@@ -14,24 +14,14 @@ steps:
       [
         "app",
         "deploy",
-        "app.yaml",
-        "--project=competition-scanner",
+        "appDev.yaml",
+        "--project=codit-luxembourg",
         "--quiet"
       ]
     timeout: "20000s"
     env:
       - GCP_BUCKET_NAME=${_GCP_BUCKET_NAME}
 
-  - name: "gcr.io/cloud-builders/gcloud"
-    args:
-      [
-        "app",
-        "deploy",
-        "dispatch.yaml",
-        "--project=competition-scanner",
-        "--quiet"
-      ]
-      
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 

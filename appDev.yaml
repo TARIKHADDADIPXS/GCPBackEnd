@@ -1,0 +1,14 @@
+runtime: nodejs20
+env: standard
+service: backend
+
+entrypoint: npm run start:prod
+
+
+env_variables:
+  GCP_BUCKET_NAME: codit-test-bucket
+
+
+handlers:
+  - url: /.*
+    script: auto
