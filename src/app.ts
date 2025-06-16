@@ -14,7 +14,6 @@ app.use(cors({
     "http://localhost:3000",
     "https://frontend-dot-codit-luxembourg.ew.r.appspot.com",
     "https://frontend-dot-competition-scanner.ew.r.appspot.com",
-    "https://frontend-dot-competition-scanner.ew.r.appspot.com/",
     "https://frontend.poccactus.lu",
     "https://poccactus.lu"
   ],
