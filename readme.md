@@ -147,6 +147,9 @@ This project is configured for deployment to Google App Engine Standard Environm
 ```
  gsutil cors set cors.json gs://codit-test-bucket
 ```
+```
+gsutil cors set cors.json gs://codit-bucket
+```
 
 ### Formatting & Linting
 
@@ -217,6 +220,11 @@ This project includes interactive API documentation powered by [Swagger UI](http
 - The Swagger setup is located in `src/swagger.ts`.
 
 ---
+
+### Code and repository management
+
+Pushing in to develop will deploy the app to Google Cloud Codit Luxembourg Playground
+Pushing code to main will deploy automatically to Prod Env on client tenant
 
 ## Contributing
 
