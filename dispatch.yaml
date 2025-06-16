@@ -1,5 +1,10 @@
 
 dispatch:
-- url: "backend.poccactus.lu/*"
-  service: backend 
+- url: "frontend.poccactus.lu/*"
+  service: frontend
 
+- url: "poccactus.lu/*"
+  service: frontend
+
+- url: "backend.poccactus.lu/*"
+  service: backend  
