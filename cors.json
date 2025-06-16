@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:3000/","https://frontend-dot-codit-luxembourg.ew.r.appspot.com/","https://frontend-dot-competition-scanner.ew.r.appspot.com/"],
+    "origin": ["http://localhost:3000/","https://frontend-dot-codit-luxembourg.ew.r.appspot.com/","https://frontend-dot-competition-scanner.ew.r.appspot.com/", "https://frontend.poccactus.lu/"],
     "method": ["GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH"],
     "responseHeader": ["Content-Type", "x-goog-resumable"],
     "maxAgeSeconds": 3600

@@ -11,4 +11,5 @@ env_variables:
 
 handlers:
   - url: /.*
+    login: required
     script: auto
