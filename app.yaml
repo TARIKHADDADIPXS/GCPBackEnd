@@ -6,7 +6,7 @@ entrypoint: npm run start:prod
 
 
 env_variables:
-  GCP_BUCKET_NAME: codit-bucket
+  GCP_BUCKET_NAME: competitor-scan-data
 
 
 handlers:
