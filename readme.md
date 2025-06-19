@@ -148,7 +148,7 @@ This project is configured for deployment to Google App Engine Standard Environm
  gsutil cors set cors.json gs://codit-test-bucket
 ```
 ```
-gsutil cors set cors.json gs://codit-bucket
+gsutil cors set cors.json gs://competitor-scan-data
 ```
 
 ### Formatting & Linting
