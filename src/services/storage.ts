@@ -8,7 +8,7 @@ if (!bucketName) throw new Error("Missing required environment variables.");
 const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
-export async function generateSignedUrl(filename: string): Promise<{ url: string; fileId: string }> {
+export async function generateSignedUrl(filename: string, contentType: string): Promise<{ url: string; fileId: string }> {
   // Generate timestamp and random digits
   const now = new Date();
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -24,7 +24,7 @@ export async function generateSignedUrl(filename: string): Promise<{ url: string
     version: "v4",
     action: "write",
     expires,
-    contentType: "application/octet-stream",
+    contentType,
   });
   return { url, fileId };
 }
