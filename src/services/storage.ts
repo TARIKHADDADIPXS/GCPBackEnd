@@ -8,7 +8,7 @@ if (!bucketName) throw new Error("Missing required environment variables.");
 const storage = new Storage();
 const bucket = storage.bucket(bucketName);
 
-export async function generateSignedUrl(filename: string, contentType: string): Promise<{ url: string; fileId: string }> {
+export async function generateSignedUrl(filename: string, contentType: string,location:string): Promise<{ url: string; fileId: string, metadataUrl:string }> {
   // Generate timestamp and random digits
   const now = new Date();
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -16,6 +16,7 @@ export async function generateSignedUrl(filename: string, contentType: string): 
   const randomDigits = Math.floor(100 + Math.random() * 900);
   const originalFilename = filename.split('/').pop();
   const fileId = `inputs/${timestamp}_${randomDigits}_${originalFilename}`;
+  const metadataId = `metadata/${timestamp}_${randomDigits}_${originalFilename}.json`;
 
   const file = bucket.file(fileId);
   const expires = Date.now() + 10 * 60 * 1000;
@@ -26,5 +27,13 @@ export async function generateSignedUrl(filename: string, contentType: string): 
     expires,
     contentType,
   });
-  return { url, fileId };
+
+    // Signed URL for metadata
+  const [metadataUrl] = await bucket.file(metadataId).getSignedUrl({
+    version: "v4",
+    action: "write",
+    expires,
+    contentType: "application/json",
+  });
+  return { url, fileId,metadataUrl  };
 }
