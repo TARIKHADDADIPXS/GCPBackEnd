@@ -36,13 +36,17 @@ import { generateSignedUrl } from "../services/storage";
 const router = Router();
 
 router.post("/get-signed-url", async (req: Request, res: Response): Promise<any> => {
-  const { filename,fileType } = req.body;
+  const { filename,fileType, location } = req.body;
+
   if (!filename || typeof filename !== "string") {
     return res.status(400).json({ error: "Filename is required and must be a string" });
   }
+  if (!location || typeof location !== "string") {
+    return res.status(400).json({ error: "The location information is required and must be a string" });
+  }
   try {
-    const { url, fileId } = await generateSignedUrl(filename, fileType);
-    return res.json({ url, fileId });
+    const { url, fileId, metadataUrl } = await generateSignedUrl(filename, fileType, location);
+    return res.json({ url, fileId, metadataUrl });
   } catch (err) {
     console.error("Error generating signed URL:", err);
     return res.status(500).json({ error: "Failed to generate signed URL" });
